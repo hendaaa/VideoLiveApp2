@@ -1,5 +1,6 @@
 package com.example.dell.videoliveapp;
 
+import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import org.opencv.imgproc.Imgproc;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private  static final String TAG = "MainActivity";
+    public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     JavaCameraView javaCameraView;
     Mat mRgba ,imgGray;
     BaseLoaderCallback mLoaderCallback =new BaseLoaderCallback(this) {
@@ -40,6 +42,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (PermissionUtils.requestPermission(
+                this,
+                CAMERA_PERMISSIONS_REQUEST,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA)) {
+
+        }
 javaCameraView =findViewById(R.id.java_camera_view);
 javaCameraView.setVisibility(SurfaceView.VISIBLE);
 javaCameraView.setCvCameraViewListener(this);
