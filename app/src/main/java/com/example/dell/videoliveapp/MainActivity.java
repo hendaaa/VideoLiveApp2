@@ -73,7 +73,7 @@ javaCameraView.setCvCameraViewListener(this);
         super.onResume();
         if (OpenCVLoader.initDebug()) {
             Log.i(TAG, "Opencv loaded successfully");
-mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         } else {
             Log.i(TAG, "Opencv not loaded ");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_8,this,mLoaderCallback);
@@ -95,7 +95,7 @@ mRgba.release();
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba =inputFrame.rgba();
-        Imgproc.cvtColor(mRgba,imgGray,Imgproc.COLOR_BayerBG2GRAY);
-        return mRgba;
+        Imgproc.cvtColor(mRgba,imgGray,Imgproc.COLOR_RGBA2GRAY);
+        return imgGray;
     }
 }
